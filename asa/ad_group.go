@@ -105,14 +105,6 @@ const (
 	AdGroupStatusPaused AdGroupStatus = "PAUSED"
 )
 
-// Money is the response to requests for budget amounts in campaigns
-//
-// https://developer.apple.com/documentation/apple_search_ads/money
-type Money struct {
-	Amount   string `json:"amount"`
-	Currency string `json:"currency"`
-}
-
 // AdGroup is the response to ad group requests
 //
 // https://developer.apple.com/documentation/apple_search_ads/adgroup
