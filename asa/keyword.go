@@ -62,7 +62,7 @@ type Keyword struct {
 
 // KeywordListResponse defines model for Keyword List Response.
 //
-//https://developer.apple.com/documentation/apple_search_ads/keywordlistresponse
+// https://developer.apple.com/documentation/apple_search_ads/keywordlistresponse
 type KeywordListResponse struct {
 	Keywords   []*Keyword         `json:"data,omitempty"`
 	Error      *ErrorResponseBody `json:"error,omitempty"`
@@ -132,12 +132,12 @@ func (s *KeywordService) GetAllTargetingKeywords(ctx context.Context, campaignID
 //
 // https://developer.apple.com/documentation/apple_search_ads/keywordupdaterequest
 type KeywordUpdateRequest struct {
-	AdGroupID        int64            `json:"adGroupId,omitempty"`
-	BidAmount        *Money           `json:"bidAmount,omitempty"`
-	Deleted          bool             `json:"deleted,omitempty"`
-	ID               int64            `json:"id,omitempty"`
-	MatchType        KeywordMatchType `json:"matchType"`
-	ModificationTime DateTime         `json:"modificationTime"`
+	AdGroupID        int64             `json:"adGroupId,omitempty"`
+	BidAmount        *Money            `json:"bidAmount,omitempty"`
+	Deleted          bool              `json:"deleted,omitempty"`
+	ID               int64             `json:"id,omitempty"`
+	MatchType        *KeywordMatchType `json:"matchType,omitempty"`
+	ModificationTime *DateTime         `json:"modificationTime,omitempty"`
 }
 
 // UpdateTargetingKeywords Updates targeting keywords in ad groups
