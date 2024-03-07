@@ -57,3 +57,19 @@ func (m Money) Mul(factor float64) Money {
 	amountCents = int(float64(amountCents) * factor)
 	return MoneyWithCents(amountCents, m.Currency)
 }
+
+func (m Money) Max(cents int) Money {
+	amountCents := m.AmountCents()
+	if amountCents > cents {
+		return m
+	}
+	return MoneyWithCents(cents, m.Currency)
+}
+
+func (m Money) Min(cents int) Money {
+	amountCents := m.AmountCents()
+	if cents > amountCents {
+		return m
+	}
+	return MoneyWithCents(cents, m.Currency)
+}

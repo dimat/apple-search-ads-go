@@ -135,5 +135,86 @@ func TestMul(t *testing.T) {
 			}
 		})
 	}
+}
 
+func TestMax(t *testing.T) {
+	tests := []struct {
+		m     Money
+		cents int
+		want  Money
+	}{
+		{
+			m:     Money{Amount: "0", Currency: "USD"},
+			cents: 0,
+			want:  Money{Amount: "0", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "0.50", Currency: "USD"},
+			cents: 100,
+			want:  Money{Amount: "1.00", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "USD"},
+			cents: 50,
+			want:  Money{Amount: "1.00", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "USD"},
+			cents: 100,
+			want:  Money{Amount: "1.00", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "GBP"},
+			cents: 10000,
+			want:  Money{Amount: "100.00", Currency: "GBP"},
+		},
+	}
+	for _, testCase := range tests {
+		t.Run(fmt.Sprintf("%s_max_%d", testCase.m.Amount, testCase.cents), func(t *testing.T) {
+			if got := testCase.m.Max(testCase.cents); got != testCase.want {
+				t.Errorf("Money.Max() = %v, want %v", got, testCase.want)
+			}
+		})
+	}
+}
+
+func TestMin(t *testing.T) {
+	tests := []struct {
+		m     Money
+		cents int
+		want  Money
+	}{
+		{
+			m:     Money{Amount: "0", Currency: "USD"},
+			cents: 0,
+			want:  Money{Amount: "0", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "0.50", Currency: "USD"},
+			cents: 100,
+			want:  Money{Amount: "0.50", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "USD"},
+			cents: 50,
+			want:  Money{Amount: "0.50", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "USD"},
+			cents: 100,
+			want:  Money{Amount: "1.00", Currency: "USD"},
+		},
+		{
+			m:     Money{Amount: "1.00", Currency: "GBP"},
+			cents: 10000,
+			want:  Money{Amount: "1.00", Currency: "GBP"},
+		},
+	}
+	for _, testCase := range tests {
+		t.Run(fmt.Sprintf("%s_min_%d", testCase.m.Amount, testCase.cents), func(t *testing.T) {
+			if got := testCase.m.Min(testCase.cents); got != testCase.want {
+				t.Errorf("Money.Min() = %v, want %v", got, testCase.want)
+			}
+		})
+	}
 }
