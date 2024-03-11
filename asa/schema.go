@@ -72,6 +72,22 @@ func (d *Date) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// Convert the internal date as CSV string
+func (date *Date) MarshalCSV() (string, error) {
+	return date.Time.Format("dateFormat"), nil
+}
+
+// You could also use the standard Stringer interface
+func (date *Date) String() string {
+	return date.String() // Redundant, just for example
+}
+
+// Convert the CSV string as internal date
+func (date *Date) UnmarshalCSV(csv string) (err error) {
+	date.Time, err = time.Parse(dateFormat, csv)
+	return err
+}
+
 // DateTime represents a date with an ISO8601-like date-time.
 type DateTime struct {
 	time.Time
