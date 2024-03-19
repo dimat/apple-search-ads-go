@@ -138,6 +138,7 @@ type KeywordUpdateRequest struct {
 	ID               int64             `json:"id,omitempty"`
 	MatchType        *KeywordMatchType `json:"matchType,omitempty"`
 	ModificationTime *DateTime         `json:"modificationTime,omitempty"`
+	Status           KeywordStatus     `json:"status,omitempty"`
 }
 
 // UpdateTargetingKeywords Updates targeting keywords in ad groups
